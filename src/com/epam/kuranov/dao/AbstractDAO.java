@@ -6,12 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import com.epam.kuranov.dao.daofamily.UserDAO;
-import com.epam.kuranov.dao.oracle.OracleDAOFactory;
 import com.epam.kuranov.domain.dictionary.Tables;
 import com.epam.kuranov.domain.entities.Entity;
-import com.epam.kuranov.domain.entities.impl.User;
 
 public abstract class AbstractDAO {
 	protected Connection dbConnection;
