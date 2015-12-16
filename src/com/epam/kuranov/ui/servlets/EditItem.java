@@ -15,9 +15,10 @@ import com.epam.kuranov.domain.entities.impl.Item;
 
 @WebServlet("/EditItemProt")
 public class EditItem extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-    public EditItem() {
+
+	private static final long serialVersionUID = -1419632727909218257L;
+
+	public EditItem() {
         super();
     }
 

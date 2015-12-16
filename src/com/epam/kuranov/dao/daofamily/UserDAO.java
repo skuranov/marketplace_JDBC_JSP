@@ -1,6 +1,8 @@
 package com.epam.kuranov.dao.daofamily;
 
 import com.epam.kuranov.dao.AbstractDAO;
+import com.epam.kuranov.domain.dictionary.Columns;
+import com.epam.kuranov.domain.dictionary.Tables;
 import com.epam.kuranov.domain.entities.impl.User;
 
 import java.sql.*;
@@ -16,10 +18,22 @@ public class UserDAO extends AbstractDAO {
 	}
 
 	public boolean addUser(User user) {
+		StringBuilder builder = new StringBuilder();
+    	builder.append("INSERT INTO").
+    		append(Tables.USERS.name()).
+    		append("(").
+    		append(Columns.Users.FULL_NAME.name()).
+    		append(", ").
+    		append(Columns.Users.BILLING_ADRESS.name()).
+    		append(", ").
+    		append(Columns.Users.LOGIN.name()).
+    		append(", ").
+    		append(Columns.Users.PASSWORD.name()).
+    		append(", ").
+    		append(Columns.Users.ROLE.name()).
+    		append(") VALUES(?,?,?,?,?)");
+    	String insertTableSQL = builder.toString();	    		
         try {
-            String insertTableSQL = "INSERT INTO USERS"
-                    + "(FULL_NAME, BILLING_ADRESS, LOGIN, PASSWORD, ROLE) VALUES"
-                    + "(?,?,?,?,?)";
             preparedStatement = dbConnection.prepareStatement(insertTableSQL);
             preparedStatement.setString(1, user.getFullName());
             preparedStatement.setString(2, user.getBillingAdress());
@@ -38,84 +52,23 @@ public class UserDAO extends AbstractDAO {
     }
 
 
-    public boolean deleteUser(int user_id){
-        try {
-            String selectQuery = "DELETE FROM Users WHERE User_Id=?";
-            preparedStatement = dbConnection.prepareStatement(selectQuery);
-            preparedStatement.setInt(1, user_id);
-            preparedStatement.executeQuery();
-            return true;
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-        finally {
-        	cleanObjects();
-        }
-		return false;
-    }
-
-
-    public boolean modifyUser(User user){
-        try {
-            String updateQuery = "UPDATE Users SET Full_Name=?, Billing_Adress=?, " +
-                    "Login=?, Password=? WHERE User_Id=?";
-            preparedStatement = dbConnection.prepareStatement(updateQuery);
-            preparedStatement.setString(1, user.getFullName());
-            preparedStatement.setString(2, user.getBillingAdress());
-            preparedStatement.setString(3, user.getLogin());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setInt(5, user.getId());
-            preparedStatement.executeUpdate();
-            return true;
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-        finally {
-        	cleanObjects();
-        }
-		return false;
-    }
-
-
-    public User getUserByLogin(String login){
-        try {
-            String selectQuery = "SELECT * FROM USERS WHERE LOWER(Login) = '" +
-                    login.toLowerCase() + "'";
-            preparedStatement = dbConnection.prepareStatement(selectQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return new User(resultSet.getInt("User_Id"), resultSet.getString("Full_Name"),
-                        resultSet.getString("Billing_Adress"), resultSet.getString("Login"), resultSet.getString("Password"));
-            }
-        } catch (Exception e) {
-        	e.printStackTrace();
-        } finally {
-        	cleanObjects();
-        }
-        return null;
-    }
-
-    public User getUserById(int userId){
-        try {
-            String selectQuery = "SELECT * FROM USERS WHERE User_Id = '" + userId + "'";
-            preparedStatement = dbConnection.prepareStatement(selectQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-            	return new User(resultSet);
-            }
-        } catch (Exception e) {
-        	e.printStackTrace();
-        } finally {
-        	cleanObjects();
-        }
-        return null;
-    }
-    
+   
     public User authentificate(String login, String password){
+		StringBuilder builder = new StringBuilder();
+    	builder.append("SELECT * FROM ").
+    		append(Tables.USERS.name()).
+    		append(" WHERE ").
+    		append(Columns.Users.LOGIN.name()).
+    		append(" = '").
+    		append(login).
+    		append("' AND ").
+    		append(Columns.Users.PASSWORD.name()).
+    		append(" = '").
+    		append(password).
+    		append("'");
+    	String selectQuery = builder.toString();	    
         try {
-            String selectQuery = "SELECT * FROM USERS WHERE LOGIN = '" + login + "' AND PASSWORD = '" + password +"'";
-            preparedStatement = dbConnection.prepareStatement(selectQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            runQuery(selectQuery);
             while (resultSet.next()) {
             	return new User(resultSet);
             }

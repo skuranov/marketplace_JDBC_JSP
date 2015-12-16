@@ -14,7 +14,8 @@ public class Columns {
 		FULL_NAME,
 		BILLING_ADRESS,
 		LOGIN,
-		PASSWORD;
+		PASSWORD,
+		ROLE;
 	}
 	
 	public static enum Items{

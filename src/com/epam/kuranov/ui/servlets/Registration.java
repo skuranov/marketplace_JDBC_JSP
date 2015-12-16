@@ -12,9 +12,10 @@ import com.epam.kuranov.domain.entities.impl.User;
 
 @WebServlet("/Registration")
 public class Registration extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	
-    public Registration() {
+
+	private static final long serialVersionUID = -7136814992563992834L;
+
+	public Registration() {
         super();
     }
 
@@ -27,7 +28,8 @@ public class Registration extends HttpServlet {
         		request.getParameter("fullname"),
         		request.getParameter("billingAdress"),
         		request.getParameter("login"),
-        		request.getParameter("pswd"));
+        		request.getParameter("pswd"),
+        		"simpleUser");
         userDAO.addUser(user);
 		httpResponse.sendRedirect(request.getServletContext().getContextPath() + "/ShowItemsGuest");
 	}

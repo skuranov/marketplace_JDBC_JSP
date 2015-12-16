@@ -16,7 +16,6 @@ D:\Projects\sts\marketplace\src\com\epam\kuranov\dao\daofamily\BidDAO.java
 D:\Projects\sts\marketplace\src\com\epam\kuranov\domain\entities\Entity.java
 D:\Projects\sts\marketplace\src\com\epam\kuranov\ui\servlets\EditItem.java
 D:\Projects\sts\marketplace\src\com\epam\kuranov\ui\servlets\Registration.java
-D:\Projects\sts\marketplace\src\com\epam\kuranov\ui\servlets\Bid.java
 D:\Projects\sts\marketplace\src\com\epam\kuranov\domain\dictionary\Columns.java
 D:\Projects\sts\marketplace\src\com\epam\kuranov\domain\entities\impl\User.java
 D:\Projects\sts\marketplace\src\com\epam\kuranov\ui\filters\AuthFilter.java

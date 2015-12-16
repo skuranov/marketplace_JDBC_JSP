@@ -15,8 +15,10 @@ import com.epam.kuranov.domain.entities.impl.User;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    public Login() {
+
+	private static final long serialVersionUID = -8660469073764636047L;
+
+	public Login() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

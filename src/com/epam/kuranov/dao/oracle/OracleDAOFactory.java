@@ -18,11 +18,6 @@ public class OracleDAOFactory extends DAOFactory {
 	public OracleDAOFactory(){
 		
 		dataSource = getDataSource();
-	
-//        try {
-//             connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "SYSTEM", "11111");}
-//        catch (SQLException e) {
-//        }
     }
 	
 	@Override

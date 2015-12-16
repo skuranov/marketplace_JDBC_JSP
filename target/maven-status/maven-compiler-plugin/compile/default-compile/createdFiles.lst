@@ -30,6 +30,5 @@ com\epam\kuranov\domain\entities\impl\User.class
 com\epam\kuranov\domain\dictionary\Tables$3.class
 com\epam\kuranov\domain\dictionary\Columns$Items.class
 com\epam\kuranov\domain\entities\impl\Bid.class
-com\epam\kuranov\ui\servlets\Bid.class
 com\epam\kuranov\dao\oracle\OracleDAOFactory.class
 com\epam\kuranov\domain\searchSequence\SearchByDiffParams$ValueLess.class

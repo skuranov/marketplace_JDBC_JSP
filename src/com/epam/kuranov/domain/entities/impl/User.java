@@ -12,20 +12,23 @@ public class User extends Entity{
 	private String billingAdress;
 	private String login;
 	private String password;
-
-    public User(int userId, String fullName, String billingAdress, String login, String password) {
+	//private String role;
+	
+    public User(int userId, String fullName, String billingAdress, String login, String password, String role) {
         this.id = userId;
         this.fullName = fullName;
         this.billingAdress = billingAdress;
         this.login = login;
         this.password = password;
+        //this.role = role;
     }
 
-    public User(String fullName, String billingAdress, String login, String password) {
+    public User(String fullName, String billingAdress, String login, String password, String role) {
         this.fullName = fullName;
         this.billingAdress = billingAdress;
         this.login = login;
         this.password = password;
+        //this.role = role;
     }
     
     public User(ResultSet resultSet) throws SQLException{
@@ -34,6 +37,7 @@ public class User extends Entity{
         this.billingAdress = resultSet.getString(Columns.Users.BILLING_ADRESS.name());
         this.login = resultSet.getString(Columns.Users.LOGIN.name());
         this.password = resultSet.getString(Columns.Users.PASSWORD.name());
+        //this.role = role;
     }
 
     public String getFullName() {

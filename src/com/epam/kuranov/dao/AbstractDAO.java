@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.epam.kuranov.dao.daofamily.UserDAO;
+import com.epam.kuranov.dao.oracle.OracleDAOFactory;
 import com.epam.kuranov.domain.dictionary.Tables;
 import com.epam.kuranov.domain.entities.Entity;
+import com.epam.kuranov.domain.entities.impl.User;
 
 public abstract class AbstractDAO {
 	protected Connection dbConnection;
@@ -55,8 +58,7 @@ public abstract class AbstractDAO {
     public boolean deleteById(String tableName, String idColumnName, String id){
     	try {
             String selectQuery = "DELETE FROM " + tableName + " WHERE " + idColumnName + " = " + id;
-            preparedStatement = dbConnection.prepareStatement(selectQuery);
-            preparedStatement.executeQuery();
+            runQuery(selectQuery);
             cleanObjects();
             return true;
         } catch (Exception e) {
@@ -72,8 +74,7 @@ public abstract class AbstractDAO {
     	ArrayList<Entity> entityList = new ArrayList<>();
     	String selectQuery = "SELECT * FROM " + tableName;
     	try {
-            preparedStatement = dbConnection.prepareStatement(selectQuery);
-            resultSet = preparedStatement.executeQuery(selectQuery);
+            runQuery(selectQuery);
             while (resultSet.next()) {
             	entityList.add(tableName.getNewEntity(resultSet));
             }
@@ -95,7 +96,7 @@ public abstract class AbstractDAO {
     	String selectQuery = "SELECT * FROM " + entityType.name() + " WHERE " +
         entityType.getIdColumn() + " = " + id; 
 		try{
-	    	prepareQuery(selectQuery);
+	    	runQuery(selectQuery);
 	    	while (resultSet.next()) {
 				 entity = entityType.getNewEntity(resultSet);
 			}
@@ -109,8 +110,7 @@ public abstract class AbstractDAO {
 		return entity;
 		}
     
-    
-    protected void prepareQuery(String query) throws SQLException{
+    protected void runQuery(String query) throws SQLException{
     	preparedStatement = dbConnection.prepareStatement(query);
 		resultSet = preparedStatement.executeQuery();
     }
