@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/EditItem.js"></script>
 		<title>Insert title here</title>
 	</head>
-	<body>
+	<body> 
 	
 		<form method="get" action="EditItemProt">
 		<input type="hidden" name="editFlag" value="${flEditItem}">

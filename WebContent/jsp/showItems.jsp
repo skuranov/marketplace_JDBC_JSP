@@ -14,7 +14,6 @@
 
 <h1>Online marketplace</h1>
 
-
 Logged as "${userFullName}" <a href="Logout">Logout</a>
 
 
